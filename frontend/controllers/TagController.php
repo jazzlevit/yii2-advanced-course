@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Tag;
+use yii\web\NotFoundHttpException;
+
 /**
  * Class TagController
  *
@@ -15,15 +18,26 @@ class TagController extends \yii\web\Controller
      */
     public function actionIndex()
     {
-        return 'You are on Tag/Index page';
+        $title = 'You are on Tag/Index page';
+
+        return $this->render('index', ['title' => $title]);
     }
 
     /**
      * @param $id
      * @return string
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
-        return 'You are on Tag/View page with ID: ' . $id;
+        $model = Tag::findOne($id);
+
+        if ($model === null) {
+            throw new NotFoundHttpException('Page not found');
+        }
+
+        return $this->render('view', [
+            'model' => $model,
+        ]);
     }
 }

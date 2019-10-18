@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use frontend\models\News;
+use yii\web\NotFoundHttpException;
+
 class NewsController extends \yii\web\Controller
 {
 
@@ -10,15 +13,26 @@ class NewsController extends \yii\web\Controller
      */
     public function actionIndex()
     {
-        return 'You are on News/Index page';
+        $title = 'You are on News/Index page';
+
+        return $this->render('index', ['title' => $title]);
     }
 
     /**
      * @param $id
      * @return string
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
-        return 'You are on News/View page with ID: ' . $id;
+        $model = News::findOne($id);
+
+        if ($model === null) {
+            throw new NotFoundHttpException('Page not found');
+        }
+
+        return $this->render('view', [
+            'model' => $model,
+        ]);
     }
 }
