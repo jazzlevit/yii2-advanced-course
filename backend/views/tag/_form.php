@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group pull-right">
 
-        <?php echo Html::a('Cancel', ['news/index'], ['class' => 'btn btn-default']) ?>
+        <?php echo Html::a('Cancel', ['tag/index'], ['class' => 'btn btn-default']) ?>
 
         <?php echo Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
 

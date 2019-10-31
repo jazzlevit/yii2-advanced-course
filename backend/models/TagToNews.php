@@ -30,10 +30,13 @@ class TagToNews extends \yii\db\ActiveRecord
     {
         return [
             [['tag_id', 'news_id'], 'required'],
+
             [['tag_id', 'news_id'], 'integer'],
+
             [['tag_id', 'news_id'], 'unique', 'targetAttribute' => ['tag_id', 'news_id']],
-            [['news_id'], 'exist', 'skipOnError' => true, 'targetClass' => News::className(), 'targetAttribute' => ['news_id' => 'id']],
-            [['tag_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tag::className(), 'targetAttribute' => ['tag_id' => 'id']],
+
+            [['news_id'], 'exist', 'skipOnError' => true, 'targetClass' => News::class, 'targetAttribute' => ['news_id' => 'id']],
+            [['tag_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tag::class, 'targetAttribute' => ['tag_id' => 'id']],
         ];
     }
 
@@ -53,7 +56,7 @@ class TagToNews extends \yii\db\ActiveRecord
      */
     public function getNews()
     {
-        return $this->hasOne(News::className(), ['id' => 'news_id']);
+        return $this->hasOne(News::class, ['id' => 'news_id']);
     }
 
     /**
@@ -61,6 +64,6 @@ class TagToNews extends \yii\db\ActiveRecord
      */
     public function getTag()
     {
-        return $this->hasOne(Tag::className(), ['id' => 'tag_id']);
+        return $this->hasOne(Tag::class, ['id' => 'tag_id']);
     }
 }

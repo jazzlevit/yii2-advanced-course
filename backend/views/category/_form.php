@@ -30,7 +30,7 @@ use kartik\form\ActiveForm;
 
     <div class="form-group pull-right">
 
-        <?php echo Html::a('Cancel', ['news/index'], ['class' => 'btn btn-default']) ?>
+        <?php echo Html::a('Cancel', ['category/index'], ['class' => 'btn btn-default']) ?>
 
         <?php echo Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
 

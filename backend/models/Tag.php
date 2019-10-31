@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\SluggableBehavior;
 
 /**
  * This is the model class for table "{{%tag}}".
@@ -25,14 +26,30 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => SluggableBehavior::class,
+                'attribute' => 'title',
+            ],
+        ];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['slug', 'title'], 'required'],
+            [['title'], 'required'],
+
             [['slug', 'title'], 'string', 'max' => 256],
+
             [['slug'], 'unique'],
+
             [['title'], 'unique'],
         ];
     }
@@ -54,7 +71,7 @@ class Tag extends \yii\db\ActiveRecord
      */
     public function getTagToNews()
     {
-        return $this->hasMany(TagToNews::className(), ['tag_id' => 'id']);
+        return $this->hasMany(TagToNews::class, ['tag_id' => 'id']);
     }
 
     /**
@@ -62,6 +79,7 @@ class Tag extends \yii\db\ActiveRecord
      */
     public function getNews()
     {
-        return $this->hasMany(News::className(), ['id' => 'news_id'])->viaTable('{{%tag_to_news}}', ['tag_id' => 'id']);
+//        return $this->hasMany(News::className(), ['id' => 'news_id'])->viaTable('{{%tag_to_news}}', ['tag_id' => 'id']);
+        return $this->hasMany(News::class, ['id' => 'news_id'])->via('tagToNews');
     }
 }

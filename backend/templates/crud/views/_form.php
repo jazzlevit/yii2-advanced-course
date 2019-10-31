@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
 } ?>
     <div class="form-group pull-right">
 
-        <?php echo '<?php echo '?>Html::a('Cancel', ['news/index'], ['class' => 'btn btn-default']) ?>
+        <?php echo '<?php echo '?>Html::a('Cancel', ['<?php echo $generator->getControllerID(); ?>/index'], ['class' => 'btn btn-default']) ?>
 
         <?php echo "<?php echo " ?>Html::submitButton(<?php echo $generator->generateString('Save') ?>, ['class' => 'btn btn-success']) ?>
 

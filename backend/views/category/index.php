@@ -20,9 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            'slug',
             'title',
-            'enabled',
+            'slug',
+            [
+                'attribute' => 'enabled',
+                'format' => 'boolean',
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
