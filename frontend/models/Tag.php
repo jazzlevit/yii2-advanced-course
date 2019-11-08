@@ -12,6 +12,9 @@ use yii\db\ActiveRecord;
  * @property string $slug
  * @property string $title
  *
+ * @property TagToNews[] $tagToNews
+ * @property News[] $news
+ *
  * @package frontend\models
  */
 class Tag extends ActiveRecord
@@ -43,5 +46,21 @@ class Tag extends ActiveRecord
             'slug' => Yii::t('app', 'Slug'),
             'title' => Yii::t('app', 'Title'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTagToNews()
+    {
+        return $this->hasMany(TagToNews::class, ['tag_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNews()
+    {
+        return $this->hasMany(News::class, ['id' => 'news_id'])->via('tagToNews');
     }
 }

@@ -18,7 +18,7 @@ class EnabledHelper
      */
     public static function getEnabledList()
     {
-        return [static::ENABLED_NO, static::ENABLED_NO];
+        return [static::ENABLED_NO, static::ENABLED_YES];
     }
 
     /**
