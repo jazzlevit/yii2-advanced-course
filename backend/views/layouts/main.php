@@ -36,16 +36,14 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Category', 'url' => ['/category/index']],
+        ['label' => 'News', 'url' => ['/news/index']],
+        ['label' => 'Tag', 'url' => ['/tag/index']],
+        ['label' => 'Translations', 'url' => ['/message/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems = [
-            ['label' => 'Category', 'url' => ['/category/index']],
-            ['label' => 'News', 'url' => ['/news/index']],
-            ['label' => 'Tag', 'url' => ['/tag/index']],
-        ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

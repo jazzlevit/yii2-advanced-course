@@ -77,6 +77,14 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionMessage()
+    {
+        // example of "yii" category messages
+//        Yii::$app->session->setFlash('success', Yii::t('yii', 'No results found.'));
+
+        return $this->render('message');
+    }
+
     /**
      * Logs in a user.
      *

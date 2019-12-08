@@ -7,11 +7,13 @@
 use yii\helpers\Html;
 use yii\widgets\ListView;
 
-echo Html::tag('h1', 'Category name - "' . $model->title . '"');
+$title = Yii::t('frontend', 'Category name: "{name}"', ['name' => $model->title]);
+
+echo Html::tag('h1', $title);
 
 if ($dataProvider->getCount() > 0) {
 
-    echo Html::tag('h3', 'List of news related to the category');
+    echo Html::tag('h3', Yii::t('frontend', 'List of news:'));
 
     echo ListView::widget([
         'dataProvider' => $dataProvider,
@@ -23,6 +25,6 @@ if ($dataProvider->getCount() > 0) {
 
 echo Html::tag(
     'p',
-    Html::a('Go back', ['category/index'], ['class' => 'btn btn-default']),
+    Html::a(Yii::t('frontend', 'Go back'), ['category/index'], ['class' => 'btn btn-default']),
     ['class' => 'text-right']
 );

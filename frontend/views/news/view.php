@@ -17,6 +17,6 @@ echo Html::tag('div', \yii\helpers\HtmlPurifier::process($model->description));
 
 echo Html::tag(
     'p',
-    Html::a('Go back', ['news/index'], ['class' => 'btn btn-default']),
+    Html::a(Yii::t('frontend', 'Go back'), ['news/index'], ['class' => 'btn btn-default']),
     ['class' => 'text-right']
 );
