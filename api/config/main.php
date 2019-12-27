@@ -50,17 +50,15 @@ return [
                     'controller' => 'category',
 //                    'pluralize' => false,
 //                    'only' => ['index', 'options'],
-
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'news',
-//                    'only' => ['index', 'options'],
+                    'only' => ['index', 'view', 'options'],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'tag',
-                    'only' => ['index', 'options'],
                 ],
             ],
         ],

@@ -3,7 +3,6 @@
 namespace frontend\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 
 /**
  * Class Category
@@ -17,14 +16,8 @@ use yii\db\ActiveRecord;
  *
  * @package frontend\models
  */
-class Category extends ActiveRecord
+class Category extends \common\models\Category
 {
-
-    public static function tableName()
-    {
-        return '{{%category}}';
-    }
-
     /**
      * {@inheritdoc}
      */

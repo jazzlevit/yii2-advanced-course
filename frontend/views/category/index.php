@@ -11,6 +11,7 @@ echo Html::tag('h2', Html::encode($title));
 
 if ($dataProvider->getCount() > 0) {
     echo ListView::widget([
+        'id' => 'categoryGrid',
         'dataProvider' => $dataProvider,
         'itemView' => '_category_item',
         'itemOptions' => ['tag' => null],

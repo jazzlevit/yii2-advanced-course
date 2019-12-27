@@ -2,7 +2,6 @@
 
 namespace api\controllers;
 
-use yii\helpers\ArrayHelper;
 use yii\rest\ActiveController;
 
 /**
@@ -18,20 +17,8 @@ class NewsController extends ActiveController
     /**
      * {@inheritdoc}
      */
-    protected function verbs()
-    {
-        return [
-            'index' => ['GET', 'HEAD'],
-            'view' => ['GET', 'HEAD'],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function actions()
     {
-        // Example 1
         return [
             'index' => [
                 'class' => 'yii\rest\IndexAction',
@@ -49,20 +36,17 @@ class NewsController extends ActiveController
                 'resourceOptions' => ['GET', 'HEAD', 'OPTIONS'],
             ],
         ];
-
-        // Example 2
-//        $parent = parent::actions();
-//
-//        ArrayHelper::remove($parent, 'create');
-//        ArrayHelper::remove($parent, 'update');
-//        ArrayHelper::remove($parent, 'delete');
-//
-//        return ArrayHelper::merge($parent, [
-//            'options' => [
-//                'class' => 'yii\rest\OptionsAction',
-//                'collectionOptions' => ['GET', 'HEAD', 'OPTIONS'],
-//                'resourceOptions' => ['GET', 'HEAD', 'OPTIONS'],
-//            ],
-//        ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function verbs()
+    {
+        return [
+            'index' => ['GET', 'HEAD'],
+            'view' => ['GET', 'HEAD'],
+        ];
+    }
+
 }

@@ -1,0 +1,10 @@
+suite_namespace: api\tests\api
+actor: ApiTester
+modules:
+    enabled:
+        - \api\tests\Helper\Api
+        - REST:
+            depends: PhpBrowser
+            url: http://api.yii2.loc/index-test.php
+        - Yii2:
+            part: [fixtures]

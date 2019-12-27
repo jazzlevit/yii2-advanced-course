@@ -15,16 +15,8 @@ use yii\behaviors\SluggableBehavior;
  * @property TagToNews[] $tagToNews
  * @property News[] $news
  */
-class Tag extends \yii\db\ActiveRecord
+class Tag extends \common\models\Tag
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return '{{%tag}}';
-    }
-
     /**
      * @return array
      */

@@ -21,18 +21,10 @@ use yii\validators\RequiredValidator;
  * @property TagToNews[] $tagToNews
  * @property Tag[] $tags
  */
-class News extends \yii\db\ActiveRecord
+class News extends \common\models\News
 {
 
     public $formTag = [];
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return '{{%news}}';
-    }
 
     /**
      * @return array

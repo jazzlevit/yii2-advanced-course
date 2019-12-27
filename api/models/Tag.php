@@ -11,16 +11,8 @@ namespace api\models;
  *
  * @property News[] $news
  */
-class Tag extends \yii\db\ActiveRecord
+class Tag extends \common\models\Tag
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return '{{%tag}}';
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -36,6 +28,6 @@ class Tag extends \yii\db\ActiveRecord
      */
     public function getNews()
     {
-        return $this->hasMany(News::class, ['id' => 'news_id'])->viaTable('{{%tag_to_news}}', ['tag_id' => 'id']);
+        return $this->hasMany(News::className(), ['id' => 'news_id'])->viaTable('{{%tag_to_news}}', ['tag_id' => 'id']);
     }
 }

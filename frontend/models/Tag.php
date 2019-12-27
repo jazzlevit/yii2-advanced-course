@@ -3,7 +3,6 @@
 namespace frontend\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 
 /**
  * Class Tag
@@ -17,17 +16,8 @@ use yii\db\ActiveRecord;
  *
  * @package frontend\models
  */
-class Tag extends ActiveRecord
+class Tag extends \common\models\Tag
 {
-
-    /**
-     * @return string
-     */
-    public static function tableName()
-    {
-        return '{{%tag}}';
-    }
-
     /**
      * @return array
      */

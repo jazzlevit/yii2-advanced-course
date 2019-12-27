@@ -15,16 +15,8 @@ use yii\behaviors\SluggableBehavior;
  *
  * @property News[] $news
  */
-class Category extends \yii\db\ActiveRecord
+class Category extends \common\models\Category
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return '{{%category}}';
-    }
-
     /**
      * @return array
      */

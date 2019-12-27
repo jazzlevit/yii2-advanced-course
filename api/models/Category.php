@@ -2,8 +2,6 @@
 
 namespace api\models;
 
-use yii\behaviors\SluggableBehavior;
-use yii\db\ActiveRecord;
 use yii\helpers\Url;
 use yii\web\Link;
 use yii\web\Linkable;
@@ -19,27 +17,8 @@ use yii\web\Linkable;
  *
  * @package api\models
  */
-class Category extends ActiveRecord implements Linkable
+class Category extends \common\models\Category implements Linkable
 {
-
-    public static function tableName()
-    {
-        return '{{%category}}';
-    }
-
-    /**
-     * @return array
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => SluggableBehavior::class,
-                'attribute' => 'title',
-            ],
-        ];
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -48,7 +27,7 @@ class Category extends ActiveRecord implements Linkable
         return [
             ['enabled', 'default', 'value' => 0],
 
-            [['title', 'enabled'], 'required'],
+            [['title', 'slug', 'enabled'], 'required'],
 
             [['enabled'], 'boolean'],
 
@@ -58,24 +37,26 @@ class Category extends ActiveRecord implements Linkable
         ];
     }
 
+    /**
+     * @return array
+     */
     public function fields()
     {
         return [
-            'pk' => 'id',
+            'id',
             'slug',
             'title',
+            'enabled'
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getLinks()
     {
         return [
             Link::REL_SELF => Url::to(['category/view', 'id' => $this->id], true),
-//            'self' => 'http://example.com/users/1',
-//            'friends' => [
-//                'http://example.com/users/2',
-//                'http://example.com/users/3',
-//            ],
         ];
     }
 }

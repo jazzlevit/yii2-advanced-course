@@ -15,6 +15,7 @@ if ($dataProvider->getCount() > 0) {
     echo Html::tag('h3', Yii::t('frontend', 'List of news:'));
 
     echo ListView::widget([
+        'id' => 'newsGrid',
         'dataProvider' => $dataProvider,
         'itemView' => '//news/_news_item_short',
         'itemOptions' => ['tag' => null],

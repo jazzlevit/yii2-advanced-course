@@ -3,8 +3,8 @@
 namespace api\models;
 
 use Yii;
-use yii\behaviors\SluggableBehavior;
-use yii\validators\RequiredValidator;
+use yii\helpers\Url;
+use yii\web\Linkable;
 
 /**
  * This is the model class for table "{{%news}}".
@@ -17,60 +17,24 @@ use yii\validators\RequiredValidator;
  * @property int $enabled
  *
  * @property Category $category
- * @property Tag[] $tags
  */
-class News extends \yii\db\ActiveRecord
+class News extends \common\models\News implements Linkable
 {
-
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public static function tableName()
+    public function rules()
     {
-        return '{{%news}}';
+        return [];
     }
 
     /**
      * @return array
      */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => SluggableBehavior::class,
-                'attribute' => 'title',
-            ],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            ['enabled', 'default', 'value' => 0],
-
-            [['title', 'description', 'enabled'], RequiredValidator::class],
-
-            ['category_id', 'integer'],
-
-            ['enabled', 'boolean'],
-
-            [['description'], 'string'],
-
-            [['slug', 'title'], 'string', 'max' => 256],
-            [['slug'], 'unique'],
-
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
-        ];
-    }
-
     public function fields()
     {
         return [
             'id',
-            'category_id',
             'slug',
             'title',
             'enabled' => function () {
@@ -79,6 +43,9 @@ class News extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * @return array
+     */
     public function extraFields()
     {
         return [
@@ -86,7 +53,6 @@ class News extends \yii\db\ActiveRecord
             'category',
         ];
     }
-
 
     /**
      * @return \yii\db\ActiveQuery
@@ -97,11 +63,22 @@ class News extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return Tag[]|null|\yii\db\ActiveQuery
-     * @throws \yii\base\InvalidConfigException
+     * @return array
      */
-    public function getTags()
+    public function getLinks()
     {
-        return $this->hasMany(Tag::class, ['id' => 'tag_id'])->viaTable('{{%tag_to_news}}', ['news_id' => 'id']);
+        return [
+            'self' => Url::to(['news/view', 'id' => $this->id], true),
+            'category' => Url::to(['category/view', 'id' => $this->category_id], true),
+        ];
     }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+//    public function getTags()
+//    {
+//        return $this->hasMany(Tag::class, ['id' => 'tag_id'])->viaTable('{{%tag_to_news}}', ['news_id' => 'id']);
+//    }
 }

@@ -9,9 +9,17 @@ class HomeCest
     public function checkOpen(FunctionalTester $I)
     {
         $I->amOnPage(\Yii::$app->homeUrl);
-        $I->see('My Application');
-        $I->seeLink('About');
-        $I->click('About');
-        $I->see('This is the About page.');
+        $I->see('Online news');
+        $I->see('Subscribe to get the latest news');
+        $I->seeLink('Start the journey');
+        $I->click('Start the journey');
+        $I->see('You are on News/Index page');
+
+        $I->seeLink('Home');
+        $I->seeLink('News');
+        $I->seeLink('Categories');
+        $I->seeLink('Tags');
+        $I->seeLink('Signup');
+        $I->seeLink('Login');
     }
 }

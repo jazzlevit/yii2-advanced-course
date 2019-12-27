@@ -13,16 +13,8 @@ use Yii;
  * @property News $news
  * @property Tag $tag
  */
-class TagToNews extends \yii\db\ActiveRecord
+class TagToNews extends \common\models\TagToNews
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return '{{%tag_to_news}}';
-    }
-
     /**
      * {@inheritdoc}
      */

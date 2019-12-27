@@ -3,7 +3,6 @@
 namespace frontend\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 
 /**
  * Class News
@@ -22,17 +21,8 @@ use yii\db\ActiveRecord;
  *
  * @package frontend\models
  */
-class News extends ActiveRecord
+class News extends \common\models\News
 {
-
-    /**
-     * @return string
-     */
-    public static function tableName()
-    {
-        return '{{%news}}';
-    }
-
     /**
      * @return array
      */
