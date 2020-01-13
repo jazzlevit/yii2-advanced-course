@@ -77,6 +77,59 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    /**
+     * Example of data cache
+     */
+    public function actionCacheData()
+    {
+
+        // Example of cache 1
+        $key = 'example-of-cache-1';
+
+        $cache = Yii::$app->cache;
+
+        $data = $cache->get($key);
+
+        if ($data === false) {
+            $data = 'Cached text';
+
+            var_dump($data);
+
+            $cache->set($key, $data);
+        }
+
+        var_dump($data);
+
+        // Example of cache 2
+        $key = 'example-of-cache-2';
+        $data2 = $cache->getOrSet($key, function () {
+//            return 0;
+            return \frontend\models\Category::findOne(1);
+        }, 10);
+
+        var_dump($data2);
+    }
+
+    /**
+     * Example of data cache with file dependency
+     */
+    public function actionCacheFile()
+    {
+        $cache = Yii::$app->cache;
+        $key = 'file-dependency-example';
+
+        $dependency = new \yii\caching\FileDependency(['fileName' => '@frontend/views/site/index.php']);
+
+        $data = $cache->get($key);
+        if (false === $data) {
+            $data = [10, 20, 30, 40, 50, 60];
+            $cache->set($key, $data, null, $dependency);
+        }
+
+        var_dump($data);
+    }
+
+
     public function actionMessage()
     {
         // example of "yii" category messages
