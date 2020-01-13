@@ -15,6 +15,32 @@ use yii\web\NotFoundHttpException;
 class CategoryController extends \yii\web\Controller
 {
 
+    public function behaviors()
+    {
+        return [
+            // Example of Http cache (header Last Modified)
+            [
+                'class' => 'yii\filters\HttpCache',
+                'only' => ['index'],
+//                'cacheControlHeader' => 'public, max-age=5',
+                'lastModified' => function ($action, $params) {
+                    return time();
+                },
+            ],
+
+            // Example of Http cache (header ETag serializes `slug` and `title`)
+            [
+                'class' => 'yii\filters\HttpCache',
+                'sessionCacheLimiter' => 'public',
+                'only' => ['view'],
+                'etagSeed' => function ($action, $params) {
+                    $model = Category::findOne(\Yii::$app->request->get('id'));
+                    return serialize([$model->slug, $model->title]);
+                },
+            ],
+        ];
+    }
+
     /**
      * @return string
      */

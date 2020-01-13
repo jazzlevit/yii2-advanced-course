@@ -8,6 +8,12 @@ return [
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
+            'keyPrefix' => 'yii2-advanced',
+        ],
+        'frontend-cache' => [
+            'class' => 'yii\caching\FileCache',
+            'keyPrefix' => 'yii2-advanced-frontend',
+            'cachePath' => '@frontend/runtime/cache',
         ],
     ],
 ];

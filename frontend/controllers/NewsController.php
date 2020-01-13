@@ -5,10 +5,46 @@ namespace frontend\controllers;
 use frontend\models\News;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
 class NewsController extends \yii\web\Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            // Example of Page cache for Index page
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['index'],
+                'duration' => 360,
+                'variations' => [
+                    Yii::$app->request->get('per-page'),
+                    Yii::$app->request->get('page'),
+                ],
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM ' . News::tableName(),
+//                    'sql' => News::find()->select('COUNT(*)')->createCommand()->getRawSql(),
+                ],
+            ],
+
+            // Example of Page cache for View page
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['view'],
+                'duration' => 360,
+                'variations' => [\Yii::$app->request->get('id')],
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => News::find()->select('slug')
+                        ->where(['id' => \Yii::$app->request->get('id')])
+                        ->createCommand()->getRawSql(),
+                ],
+            ],
+        ];
+    }
 
     /**
      * @return string
